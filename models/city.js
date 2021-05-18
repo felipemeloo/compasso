@@ -12,7 +12,7 @@ const citySchema = new Schema({
     }
 })
 
-const City = mongoose.model('city', citySchema)
+const City = mongoose.model('cities', citySchema)
 
 module.exports = City
 

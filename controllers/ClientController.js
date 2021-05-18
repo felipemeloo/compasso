@@ -11,7 +11,7 @@ class ClientController {
             cityWhereLive: req.body.cityWhereLive
         }
 
-        const saveClient = await Client.create(payloadClient)
+        await Client.create(payloadClient)
             .then(client => {
                 res.status(200).json(client)
             })
@@ -22,7 +22,7 @@ class ClientController {
     }
 
     async findBydIdClient(req, res) {
-        const findClient = await Client.findById({_id: req.params.id})
+        await Client.findById({_id: req.params.id})
             .then(client => {
                 if (!client) res.status(404).json({message: 'Client was not found'})
                 res.status(200).json(client)
@@ -33,7 +33,7 @@ class ClientController {
     }
 
     async findByNameClient(req, res) {
-        const findClient = await Client.findOne({fullName: req.params.fullName})
+        await Client.findOne({fullName: req.params.fullName})
             .then(client => {
                 if (!client) res.status(404).json({message: 'Client was not found'})
                 res.status(200).json(client)
@@ -45,9 +45,10 @@ class ClientController {
     }
 
     async deleteClient(req, res) {
-        const clientToRemove = await Client.deleteOne({_id: req.params.id})
+        await Client.deleteOne({_id: req.params.id})
             .then(clientRemoved => {
-                res.status(200).json(clientRemoved)
+                clientRemoved.n == 1 && clientRemoved.ok == 1 ? res.status(200).json({message: "Client deleted"}) :
+                    res.status(400).json({message: "Error trying delete the client"})
             })
             .catch(err => {
                 console.log(err)
@@ -56,13 +57,15 @@ class ClientController {
     }
 
     async updateClientName(req, res) {
-        if (!req.body || !req.body.fullName) {
+
+        if (!req.body || !req.body.fullName || !req.params.id) {
             res.status(400).json({message: 'Missing fields required'})
         }
 
-        const updateClient = await Client.updateOne({_id: ObjectId(req.body.id), fullName: req.body.fullName})
+        await Client.updateOne({_id: req.params.id}, {$set: {fullName: req.body.fullName}})
             .then(client => {
-                res.status(200).json(client)
+                client.n == 1 && client.ok == 1 ? res.status(200).json({message: "Client updated"}) :
+                    res.status(400).json({message: "Error trying updated the client"})
             })
             .catch(err => {
                 console.log(err)

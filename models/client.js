@@ -24,7 +24,7 @@ const citySchema = new Schema({
     }
 })
 
-const Client = mongoose.model('client', citySchema)
+const Client = mongoose.model('clients', citySchema)
 
 module.exports = Client
 
