@@ -14,6 +14,12 @@ npm install
 
 Caso não tenha o [node](https://nodejs.org/en/) instalado, necessário baixar e instalar.
 
+Após instalar as dependências do projeto, basta executar com o seguinte comando:
+
+```
+npm start
+```
+
 ## Usabilidade
 
 Abaixo, seguem api´s desenvolvidas para contemplar as necessidades do projeto.
