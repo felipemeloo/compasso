@@ -44,7 +44,7 @@ POST - localhost:3000/v1/clients/create -> Exemplo Request Body:
     "age": "29",
     "cityWhereLive": "Gama"
 }
-GET - localhost:3000/v1/clients/findByNameClient/{idClient}
+GET - localhost:3000/v1/clients/findByNameClient/{name}
 GET - localhost:3000/v1/clients/{idClient}
 PUT - localhost:3000/v1/clients/{idClient} -> Exemplo Request Body: 
    {
