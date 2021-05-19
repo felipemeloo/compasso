@@ -33,7 +33,7 @@ class ClientController {
     }
 
     async findByNameClient(req, res) {
-        await Client.findOne({fullName: req.params.fullName})
+        await Client.findOne({fullName: req.params.name})
             .then(client => {
                 if (!client) res.status(404).json({message: 'Client was not found'})
                 res.status(200).json(client)
